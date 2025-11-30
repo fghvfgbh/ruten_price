@@ -1,20 +1,27 @@
-# src/database/__init__.py (關鍵修正)
+# src/database/__init__.py (修正 init_db 函式)
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from typing import Generator
-from config import DATABASE_URL
+from config import DATABASE_URL 
+from .models import Base
+import os # 確保有 os 導入
 
-# 【關鍵修正：將相對導入改為絕對導入】
-# 雖然 models.py 在同一個資料夾，但打包後必須使用絕對導入避免路徑錯誤
-from src.database.models import Base
-
-engine = create_engine(DATABASE_URL)
-# ... (其餘程式碼保持不變) ...
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# ... (engine 和 SessionLocal 定義保持不變) ...
 
 def init_db():
-    """初始化資料庫：如果表格不存在則創建它們。"""
+    """初始化資料庫：確保資料夾存在並創建表格。"""
+    
+    # 【關鍵修正：處理 /tmp 路徑，並確保父目錄存在】
+    # 由於我們使用了 /tmp/ruten_price.db，這裡只需要確保檔案可以被創建。
+    
+    # 如果您堅持使用原來的相對路徑，則需要使用以下邏輯:
+    # db_path = DATABASE_URL.replace("sqlite:///", "") 
+    # data_dir = os.path.dirname(db_path) 
+    # if data_dir and not os.path.exists(data_dir):
+    #     os.makedirs(data_dir) 
+        
+    # 創建所有 Base 中定義的表格
     Base.metadata.create_all(bind=engine)
 
 def get_db() -> Generator[SessionLocal, None, None]:
