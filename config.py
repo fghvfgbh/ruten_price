@@ -1,7 +1,11 @@
 # config.py
 
 # --- 資料庫配置 ---
-DATABASE_URL = "sqlite:///./data/ruten_price.db"
+# config.py (雲端修正)
+
+# --- 資料庫配置 ---
+# 更改為 /tmp 路徑，確保在 Linux 容器中擁有寫入權限
+DATABASE_URL = "sqlite:///tmp/ruten_price.db"
 
 # --- 爬蟲配置 ---
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
