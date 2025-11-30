@@ -1,5 +1,3 @@
-# src/database/__init__.py (修正 init_db 函式)
-
 # src/database/__init__.py (最終修正)
 
 from sqlalchemy import create_engine
@@ -7,13 +5,9 @@ from sqlalchemy.orm import sessionmaker
 from typing import Generator
 from config import DATABASE_URL 
 
-# 【關鍵修正：從 .models 改為 src.database.models】
+# 【關鍵修正：將相對導入改為絕對導入】
 from src.database.models import Base 
-
 # ... (engine 定義保持不變) ...
-# src/database/__init__.py (修正 init_db 函式)
-
-# ... (確保導入 os)
 import os 
 # ... (其他導入保持不變)
 
