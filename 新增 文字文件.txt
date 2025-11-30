@@ -1,8 +1,0 @@
-streamlit
-pandas
-plotly
-sqlalchemy
-apscheduler
-requests
-beautifulsoup4
-selenium
