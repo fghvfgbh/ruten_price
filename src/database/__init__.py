@@ -1,10 +1,13 @@
-# src/database/__init__.py (Streamlit Cloud 最終修正)
+# src/database/__init__.py (最終修正)
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from typing import Generator
 from config import DATABASE_URL 
-from .models import Base 
+
+# 【關鍵修正：將相對導入改為絕對導入】
+from src.database.models import Base 
+# ... (engine 定義保持不變) ...
 import os # 確保導入 os
 
 # --- 關鍵修正：確保 engine 和 SessionLocal 在頂部定義 ---
